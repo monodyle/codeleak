@@ -28,6 +28,14 @@ class MyDocument extends Document {
           <meta name="application-name" content={CONFIG.title} />
           <meta name="msapplication-TileColor" content={CONFIG.colors.title} />
           <meta name="theme-color" content={CONFIG.colors.theme} />
+
+          <link
+            rel="preload"
+            as="font"
+            href="/fonts/DelaGothicOne.woff2"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <Main />

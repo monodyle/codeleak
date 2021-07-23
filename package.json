@@ -1,5 +1,6 @@
 {
   "name": "share-code",
+  "description": "Share link with a code.",
   "private": true,
   "version": "1.0.0",
   "license": "MIT",

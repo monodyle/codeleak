@@ -1,12 +1,19 @@
 import { CONFIG } from 'constants/config.const'
 import Head from 'next/head'
 
-export default function SEO({
+interface Props {
+  title?: string
+  description?: string
+  image?: string
+  slug?: string
+}
+
+const SEO = ({
   title = CONFIG.title,
   description = CONFIG.description,
   image = CONFIG.image,
   slug = '/',
-}) {
+}: Props) => {
   const url = `${CONFIG.url}${slug}`
   const previewImage = `${CONFIG.url}${image}`
   return (
@@ -49,3 +56,5 @@ export default function SEO({
     </Head>
   )
 }
+
+export { SEO }

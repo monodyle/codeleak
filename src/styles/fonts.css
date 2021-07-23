@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Dela Gothic One';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/fonts/DelaGothicOne.woff2') format('woff2');
+  font-display: swap;
+}
