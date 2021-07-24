@@ -1,13 +1,12 @@
 {
   "name": "share-code",
   "description": "Share link with a code.",
-  "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "yarn && next start",
+    "start": "next start",
     "dev": "yarn && next",
-    "build": "yarn && next build",
+    "build": "next build",
     "prepare": "husky install",
     "lint": "eslint --fix .",
     "format": "prettier --write .",
