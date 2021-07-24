@@ -12,6 +12,8 @@ const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
         'hover:bg-purple-600',
         // focus
         'focus:bg-purple-600',
+        // disabled
+        'disabled:bg-purple-300 disabled:border-purple-400 disabled:cursor-not-allowed',
         className,
       ].join(' ')}
       {...rest}

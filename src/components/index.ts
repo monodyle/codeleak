@@ -1,5 +1,7 @@
 export * from './layout'
 export * from './seo'
+export * from './auth'
+export * from './footer'
 
 export * from './button'
 export * from './input'
