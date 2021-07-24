@@ -1,6 +1,6 @@
+import { patterns } from 'constants/pattern.const'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { randomIdGenerator } from 'utils/generate'
-import { urlPattern } from 'utils/input'
 import { supabase } from 'utils/supabase'
 
 async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
@@ -18,7 +18,7 @@ async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
   if (type === 'code' && input.length !== 8)
     return res.status(400).json({ error: 'Invalid input length' })
 
-  if (type === 'url' && urlPattern.test(input) === false)
+  if (type === 'url' && patterns.url.test(input) === false)
     return res.status(400).json({ error: 'Invalid url input' })
 
   if (type === 'code') {
@@ -26,8 +26,9 @@ async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
       .from('links')
       .select('url, created_at')
       .eq('code', input)
+      .single()
     if (error) return res.status(400).json({ error })
-    return res.json({ result: data?.[0] })
+    return res.json({ result: data })
   }
 
   if (type === 'url') {
@@ -38,8 +39,8 @@ async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
         .from('links')
         .select('url, created_at')
         .eq('code', newCode)
+        .single()
       if (error) return res.status(400).json({ error })
-      console.log(data, error)
       if (data === null || data.length === 0) {
         code = newCode
         break

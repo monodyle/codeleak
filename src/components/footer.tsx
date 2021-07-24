@@ -1,10 +1,10 @@
 import { CONFIG } from 'constants/config.const'
+import { useAtom } from 'jotai'
+import { userAtom } from 'stores/auth.store'
 import { supabase } from 'utils/supabase'
 
 export const Footer = () => {
-  const handleLogout = () => {
-    supabase.auth.signOut()
-  }
+  const [user] = useAtom(userAtom)
 
   return (
     <footer className="mt-auto">
@@ -12,12 +12,14 @@ export const Footer = () => {
         <p className="mb-1">
           {CONFIG.title} &copy; {CONFIG.author} {new Date().getFullYear()}+
         </p>
-        <button
-          className="font-medium border-b border-gray-400 border-dashed hover:text-purple-500"
-          onClick={() => handleLogout()}
-        >
-          Logout?
-        </button>
+        {user && (
+          <button
+            className="font-medium border-b border-gray-400 border-dashed hover:text-purple-500"
+            onClick={() => supabase.auth.signOut()}
+          >
+            Logout?
+          </button>
+        )}
       </div>
     </footer>
   )

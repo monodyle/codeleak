@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Layout, Input, Button, Result, Explain, Footer } from 'components'
+import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Layout, Input, Button, Result, Explain } from 'components'
+import Link from 'next/link'
 import { useAtom } from 'jotai'
 import { userAtom } from 'stores/auth.store'
 import { detector, UserInputType } from 'utils/input'
+import { loadingAtom } from 'stores/loading.store'
 
 const IndexPage = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useAtom(loadingAtom)
   const [result, setResult] = useState<null | string>(null)
   const [input, setInput] = useState('')
   const [type, setType] = useState<UserInputType>(false)
@@ -13,8 +15,10 @@ const IndexPage = () => {
 
   const handleInput = useCallback(() => {
     if (input.trim() === '') return
+    setLoading(true)
     console.log(input)
     setResult(window.btoa(input))
+    setLoading(false)
   }, [input])
 
   const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,14 +42,24 @@ const IndexPage = () => {
 
   return (
     <Layout flex>
-      <div className="h-4" />
-      {user && (
-        <div className="mb-3 text-sm text-center text-gray-500">
-          Hello{' '}
-          <span className="font-medium text-purple-500">{user.email}</span>,
-          wanna get some fun?!
-        </div>
-      )}
+      <div className="h-12" />
+      <div className="mb-3 text-sm text-center text-gray-500">
+        {user ? (
+          <Fragment>
+            Hello{' '}
+            <span className="font-medium text-purple-500">{user.email}</span>,
+            wanna get some fun?!
+          </Fragment>
+        ) : (
+          <Fragment>
+            Hello, did you know{' '}
+            <Link href="/login">
+              <a className="font-medium text-purple-500">login</a>
+            </Link>{' '}
+            can save all your sharing?
+          </Fragment>
+        )}
+      </div>
       <div className="flex items-center justify-center w-full">
         <Input
           placeholder="Enter code or URL"
@@ -66,7 +80,6 @@ const IndexPage = () => {
       {result !== null && <Result>{result}</Result>}
       <div className="h-8" />
       <Explain />
-      <Footer />
     </Layout>
   )
 }

@@ -1,16 +1,17 @@
 import { useAtom } from 'jotai'
-import { useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect } from 'react'
 import { sessionAtom, userAtom } from 'stores/auth.store'
 import { supabase } from 'utils/supabase'
+import { loadingAtom } from 'stores/loading.store'
 
 interface Props {
   children: any
 }
 
 export const Auth = (props: Props) => {
-  const [user, setUser] = useAtom(userAtom)
-  const [session, setSession] = useAtom(sessionAtom)
-  const [loading, setLoading] = useState(false)
+  const [, setUser] = useAtom(userAtom)
+  const [, setSession] = useAtom(sessionAtom)
+  const [loading, setLoading] = useAtom(loadingAtom)
 
   const handleAuth = useCallback(async () => {
     setLoading(true)
@@ -29,11 +30,20 @@ export const Auth = (props: Props) => {
     } finally {
       setLoading(false)
     }
-  }, [setSession, setUser])
+  }, [setLoading, setSession, setUser])
 
   useEffect(() => {
     handleAuth()
   }, [handleAuth])
 
-  return props.children
+  return (
+    <Fragment>
+      {loading && (
+        <div className="fixed pointer-events-none bottom-12 right-12">
+          <img src="/loading.svg" alt="Loading" width={64} height={64} />
+        </div>
+      )}
+      {props.children}
+    </Fragment>
+  )
 }
