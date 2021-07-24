@@ -19,7 +19,7 @@ const IndexPage = () => {
     console.log(input)
     setResult(window.btoa(input))
     setLoading(false)
-  }, [input])
+  }, [input, setLoading])
 
   const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') handleInput()
