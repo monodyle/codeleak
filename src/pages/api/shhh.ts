@@ -4,12 +4,15 @@ import { randomIdGenerator } from 'utils/generate'
 import { supabase } from 'utils/supabase'
 
 async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
-  const { type, input, user_id } = req.query
+  if (req.method !== 'POST')
+    return res.status(400).send({ error: 'Invalid method' })
+
+  const { type, input, user_id } = JSON.parse(JSON.parse(req.body).body)
 
   if (user_id && typeof user_id !== 'string')
     return res.status(400).json({ error: 'Invalid user' })
 
-  if (!['code', 'url'].includes(type as string))
+  if (type !== 'code' && type !== 'url')
     return res.status(400).json({ error: 'Invalid type' })
 
   if (input === undefined || (input && typeof input !== 'string'))
@@ -28,7 +31,7 @@ async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
       .eq('code', input)
       .single()
     if (error) return res.status(400).json({ error })
-    return res.json({ result: data })
+    return res.status(200).json({ result: data })
   }
 
   if (type === 'url') {
@@ -50,10 +53,10 @@ async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
       .from('links')
       .insert([{ code, url: input, created_by: user_id }])
     if (error) return res.status(400).json({ error })
-    return res.json({ result: data?.[0] })
+    return res.status(200).json({ result: data?.[0] })
   }
 
-  return res.json({ result: '' })
+  return res.status(200).json({ result: '' })
 }
 
 export default ShhhAPI
