@@ -13,7 +13,7 @@ import { detector, getButtonLabel, UserInputType } from 'utils/input'
 import { loadingAtom } from 'stores/loading.store'
 import { api } from 'constants/url.const'
 import { userAtom } from 'stores/auth.store'
-import { CodeResponse, Payload } from 'constants/interface.const'
+import { DataResult, Payload } from 'constants/interface.const'
 import { fetcher } from 'utils/fetcher'
 
 const IndexPage = () => {
@@ -35,12 +35,12 @@ const IndexPage = () => {
         input,
       }
       if (user?.id) payload.user_id = user.id
-      const { error, result } = await fetcher.post<CodeResponse>(api.shhh, {
+      const { error, result } = await fetcher.post<DataResult>(api.shhh, {
         method: 'POST',
         body: JSON.stringify(payload),
       })
       if (error) return setError(error)
-      setResult(result.url)
+      setResult(result.code || result.url)
     } catch (e) {
       console.error(e)
     } finally {
@@ -79,7 +79,7 @@ const IndexPage = () => {
       </div>
       <div className="h-6" />
       {result !== null && <Result>{result}</Result>}
-      {result !== null && <Error>{error}</Error>}
+      {error !== null && <Error>{error}</Error>}
       <div className="h-8" />
       <Explain />
     </Layout>

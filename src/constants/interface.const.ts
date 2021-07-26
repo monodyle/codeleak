@@ -12,7 +12,9 @@ export interface APIResponse<T> {
   error: string | PostgrestError | unknown
 }
 
-export interface CodeResponse {
+export interface DataResult {
+  code?: string
   url: string
   created_at: string
+  created_by?: string
 }

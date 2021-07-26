@@ -42,7 +42,6 @@ async function ShhhAPI (req: NextApiRequest, res: NextApiResponse) {
         .from('links')
         .select('url, created_at')
         .eq('code', newCode)
-        .single()
       if (error) return res.status(400).json({ error })
       if (data === null || data.length === 0) {
         code = newCode
