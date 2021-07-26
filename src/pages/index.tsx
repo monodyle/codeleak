@@ -1,20 +1,20 @@
-import { useCallback, useEffect, useState } from 'react'
 import {
-  Layout,
-  Input,
   Button,
-  Result,
-  Explain,
-  UserStatus,
   Error,
+  Explain,
+  Input,
+  Layout,
+  Result,
+  UserStatus,
 } from 'components'
-import { useAtom } from 'jotai'
-import { detector, getButtonLabel, UserInputType } from 'utils/input'
-import { loadingAtom } from 'stores/loading.store'
-import { api } from 'constants/url.const'
-import { userAtom } from 'stores/auth.store'
 import { DataResult, Payload } from 'constants/interface.const'
+import { api } from 'constants/url.const'
+import { useAtom } from 'jotai'
+import { useCallback, useEffect, useState } from 'react'
+import { userAtom } from 'stores/auth.store'
+import { loadingAtom } from 'stores/loading.store'
 import { fetcher } from 'utils/fetcher'
+import { detector, getButtonLabel, UserInputType } from 'utils/input'
 
 const IndexPage = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
@@ -40,7 +40,7 @@ const IndexPage = () => {
         body: JSON.stringify(payload),
       })
       if (error) return setError(error)
-      setResult(result.code || result.url)
+      if (result) setResult(result.code || result.url)
     } catch (e) {
       console.error(e)
     } finally {

@@ -1,4 +1,3 @@
-import { PostgrestError } from '@supabase/supabase-js'
 import { UserInputType } from 'utils/input'
 
 export interface Payload {
@@ -8,8 +7,8 @@ export interface Payload {
 }
 
 export interface APIResponse<T> {
-  result: T
-  error: string | PostgrestError | unknown
+  result: T | null
+  error: unknown
 }
 
 export interface DataResult {

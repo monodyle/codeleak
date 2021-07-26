@@ -13,7 +13,7 @@ const post = async <R>(
     })
     return response.json()
   } catch (error) {
-    return { error }
+    return { error, result: null }
   }
 }
 
