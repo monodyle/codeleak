@@ -7,6 +7,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { supabase } from 'utils/supabase'
 import { useAtom } from 'jotai'
 import { loadingAtom } from 'stores/loading.store'
+import { pages } from 'constants/url.const'
 
 const LoginPage = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
@@ -16,7 +17,7 @@ const LoginPage = () => {
   const router = useRouter()
   useEffect(() => {
     const session = supabase.auth.session()
-    if (session !== null) router.push('/')
+    if (session !== null) router.push(pages.home.path)
   }, [router])
 
   const sendLogin = async () => {

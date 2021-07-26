@@ -1,25 +1,52 @@
-import { Fragment, useCallback, useEffect, useState } from 'react'
-import { Layout, Input, Button, Result, Explain } from 'components'
-import Link from 'next/link'
+import { useCallback, useEffect, useState } from 'react'
+import {
+  Layout,
+  Input,
+  Button,
+  Result,
+  Explain,
+  UserStatus,
+  Error,
+} from 'components'
 import { useAtom } from 'jotai'
-import { userAtom } from 'stores/auth.store'
-import { detector, UserInputType } from 'utils/input'
+import { detector, getButtonLabel, UserInputType } from 'utils/input'
 import { loadingAtom } from 'stores/loading.store'
+import { api } from 'constants/url.const'
+import { userAtom } from 'stores/auth.store'
+import { CodeResponse, Payload } from 'constants/interface.const'
+import { fetcher } from 'utils/fetcher'
 
 const IndexPage = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
   const [result, setResult] = useState<null | string>(null)
+  const [error, setError] = useState<any>(null)
   const [input, setInput] = useState('')
   const [type, setType] = useState<UserInputType>(false)
   const [user] = useAtom(userAtom)
 
-  const handleInput = useCallback(() => {
+  const handleInput = useCallback(async () => {
     if (input.trim() === '') return
-    setLoading(true)
-    console.log(input)
-    setResult(window.btoa(input))
-    setLoading(false)
-  }, [input, setLoading])
+    try {
+      setResult(null)
+      setError(null)
+      setLoading(true)
+      const payload: Payload = {
+        type,
+        input,
+      }
+      if (user?.id) payload.user_id = user.id
+      const { error, result } = await fetcher.post<CodeResponse>(api.shhh, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      })
+      if (error) return setError(error)
+      setResult(result.url)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }, [input, setLoading, type, user?.id])
 
   const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') handleInput()
@@ -29,41 +56,15 @@ const IndexPage = () => {
     setType(detector(input))
   }, [input])
 
-  const getButtonLabel = () => {
-    switch (type) {
-      case 'code':
-        return 'Reveal'
-      case 'url':
-        return 'Share'
-      default:
-        return 'Hm...'
-    }
-  }
-
   return (
     <Layout flex>
       <div className="h-12" />
-      <div className="mb-3 text-sm text-center text-gray-500">
-        {user ? (
-          <Fragment>
-            Hello{' '}
-            <span className="font-medium text-purple-500">{user.email}</span>,
-            wanna get some fun?!
-          </Fragment>
-        ) : (
-          <Fragment>
-            Hello, did you know{' '}
-            <Link href="/login">
-              <a className="font-medium text-purple-500">login</a>
-            </Link>{' '}
-            can save all your sharing?
-          </Fragment>
-        )}
-      </div>
+      <UserStatus />
+      <div className="h-4" />
       <div className="flex items-center justify-center w-full">
         <Input
           placeholder="Enter code or URL"
-          className="flex-auto block max-w-sm text-center"
+          className="flex-auto block max-w-md text-center"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => handleEnterKey(e)}
@@ -73,11 +74,12 @@ const IndexPage = () => {
           onClick={() => handleInput()}
           disabled={loading || type === false || input.trim() === ''}
         >
-          {getButtonLabel()}
+          {getButtonLabel(type)}
         </Button>
       </div>
       <div className="h-6" />
       {result !== null && <Result>{result}</Result>}
+      {result !== null && <Error>{error}</Error>}
       <div className="h-8" />
       <Explain />
     </Layout>

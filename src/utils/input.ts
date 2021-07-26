@@ -8,4 +8,15 @@ const detector = (input: string): UserInputType => {
   return false
 }
 
-export { detector }
+const getButtonLabel = (type: UserInputType) => {
+  switch (type) {
+    case 'code':
+      return 'Reveal'
+    case 'url':
+      return 'Share'
+    default:
+      return 'Hm...'
+  }
+}
+
+export { detector, getButtonLabel }

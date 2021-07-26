@@ -19,9 +19,9 @@ export const Explain = () => {
         </code>
       </Paragraph>
       <Paragraph>
-        Feel free to use. If you like it, you can donate me via{' '}
+        Feel free to use. If you enojoy, you can{' '}
         <a href={LINKS.donate} className="font-medium">
-          Ko-fi
+          buy me a coffee
         </a>
         .
       </Paragraph>

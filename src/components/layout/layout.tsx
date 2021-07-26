@@ -1,6 +1,6 @@
 import { CONFIG } from 'constants/config.const'
 import { Fragment } from 'react'
-import { SEO, Header, Footer } from './index'
+import { SEO, Header, Footer } from '../'
 
 interface Props {
   title?: string

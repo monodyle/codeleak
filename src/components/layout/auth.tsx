@@ -13,18 +13,13 @@ export const Auth = (props: Props) => {
   const [, setSession] = useAtom(sessionAtom)
   const [loading, setLoading] = useAtom(loadingAtom)
 
-  const handleAuth = useCallback(async () => {
+  const handleAuth = useCallback(() => {
     setLoading(true)
     try {
       const session = supabase.auth.session()
       const user = supabase.auth.user()
-
       setSession(session)
       setUser(user)
-
-      supabase.auth.onAuthStateChange((_, session) => {
-        setSession(session)
-      })
     } catch (e) {
       console.error(e)
     } finally {
@@ -34,7 +29,10 @@ export const Auth = (props: Props) => {
 
   useEffect(() => {
     handleAuth()
-  }, [handleAuth])
+    supabase.auth.onAuthStateChange((_, session) => {
+      setSession(session)
+    })
+  }, [handleAuth, setSession])
 
   return (
     <Fragment>
