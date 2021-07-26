@@ -8,7 +8,7 @@ export const Error = ({ children }: Props) => {
       <h3 className="absolute top-0 left-0 px-2 pb-1 text-sm font-semibold text-red-700 bg-red-200 rounded-tl rounded-br">
         Error
       </h3>
-      {children}
+      {typeof children === 'object' ? JSON.stringify(children) : children}
     </div>
   )
 }
