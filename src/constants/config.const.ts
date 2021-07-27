@@ -1,9 +1,9 @@
 export const CONFIG = {
-  author: 'Monody Le',
   url: 'https://minhle.space',
   title: 'ShareCode',
+  author: 'Monody Le',
   description: 'Share link with a code.',
-  image: '/assets/og.png',
+  image: '/images/og-image.png',
   colors: {
     theme: '#FFFFFF',
     title: '#1366E9',
