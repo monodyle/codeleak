@@ -18,7 +18,7 @@ import { detector, getButtonLabel, UserInputType } from 'utils/input'
 
 const IndexPage = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
-  const [result, setResult] = useState<null | string>(null)
+  const [result, setResult] = useState<null | DataResult | string>(null)
   const [error, setError] = useState<any>(null)
   const [input, setInput] = useState('')
   const [type, setType] = useState<UserInputType>(false)
@@ -40,7 +40,8 @@ const IndexPage = () => {
         body: JSON.stringify(payload),
       })
       if (error) return setError(error)
-      if (result) setResult(result.code || result.url)
+      if (result) return setResult(result)
+      setResult('Oops! We cant look up anything, please check again.')
     } catch (e) {
       console.error(e)
     } finally {
@@ -78,7 +79,12 @@ const IndexPage = () => {
         </Button>
       </div>
       <div className="h-6" />
-      {result !== null && <Result>{result}</Result>}
+      {result !== null &&
+        (typeof result === 'string' ? (
+          <p className="text-center text-red-400">{result}</p>
+        ) : (
+          <Result>{result.code || result.url}</Result>
+        ))}
       {error !== null && <Error>{error}</Error>}
       <div className="h-8" />
       <Explain />
