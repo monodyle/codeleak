@@ -79,6 +79,24 @@ const LoginPage = () => {
                 Send me magic link!
               </Button>
             </div>
+            {/* <div className="h-12" />
+            <button
+              className="flex items-center justify-center py-2 px-4 bg-[#1877f2] rounded-lg"
+              onClick={() => {
+                supabase.auth.signIn({ provider: 'facebook' })
+              }}
+            >
+              <Image
+                src="/images/facebook.png"
+                alt="Facebook"
+                width={24}
+                height={24}
+              />
+              <div className="w-2" />
+              <span className="font-medium text-white">
+                Continue with Facebook
+              </span>
+            </button> */}
             <div className="h-6" />
             {loading && (
               <div className="text-sm text-gray-500">Wait a minute...</div>

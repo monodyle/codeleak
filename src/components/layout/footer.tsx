@@ -1,10 +1,21 @@
 import { CONFIG, LINKS } from 'constants/config.const'
 import { useAtom } from 'jotai'
+import { useRouter } from 'next/router'
 import { userAtom } from 'stores/auth.store'
 import { supabase } from 'utils/supabase'
 
 export const Footer = () => {
   const [user] = useAtom(userAtom)
+  const router = useRouter()
+
+  const handleSignout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error(error)
+      return
+    }
+    router.reload()
+  }
 
   return (
     <footer className="pt-12 mt-auto">
@@ -19,7 +30,7 @@ export const Footer = () => {
           {user && (
             <button
               className="font-medium border-b border-gray-400 border-dashed hover:text-purple-500"
-              onClick={() => supabase.auth.signOut()}
+              onClick={() => handleSignout()}
             >
               Logout?
             </button>
