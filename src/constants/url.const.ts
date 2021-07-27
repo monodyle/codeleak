@@ -6,11 +6,16 @@ export const pages = {
     path: '/',
   },
   login: {
-    title: 'Login',
+    title: 'Sign in',
     path: '/login',
+  },
+  saved: {
+    title: 'Your saved',
+    path: '/saved',
   },
 }
 
 export const api = {
   shhh: '/api/shhh',
+  saved: (user_id: string) => `/api/saved?user_id=${user_id}`,
 }

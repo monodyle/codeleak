@@ -7,7 +7,7 @@ export const Footer = () => {
   const [user] = useAtom(userAtom)
 
   return (
-    <footer className="mt-auto">
+    <footer className="pt-12 mt-auto">
       <div className="text-sm text-center text-gray-400">
         <p className="mb-1">
           {CONFIG.title} by{' '}

@@ -1,8 +1,8 @@
-import { useAtom } from 'jotai'
-import { Fragment } from 'react'
-import Link from 'next/link'
-import { userAtom } from 'stores/auth.store'
 import { pages } from 'constants/url.const'
+import { useAtom } from 'jotai'
+import Link from 'next/link'
+import { Fragment } from 'react'
+import { userAtom } from 'stores/auth.store'
 
 export const UserStatus = () => {
   const [user] = useAtom(userAtom)
@@ -12,8 +12,10 @@ export const UserStatus = () => {
       {user ? (
         <Fragment>
           Hello{' '}
-          <span className="font-medium text-purple-500">{user.email}</span>,
-          wanna get some fun?!
+          <Link href={pages.saved.path}>
+            <a className="font-medium text-purple-500">{user.email}</a>
+          </Link>
+          , wanna get some fun?!
         </Fragment>
       ) : (
         <Fragment>

@@ -1,5 +1,16 @@
 import { APIResponse } from 'constants/interface.const'
 
+const get = async <T>(url: string, options = {}): Promise<APIResponse<T>> => {
+  try {
+    const response = await fetch(url, {
+      ...options,
+    })
+    return response.json()
+  } catch (error) {
+    return { error, result: null }
+  }
+}
+
 const post = async <R>(
   url: string,
   data: any,
@@ -18,5 +29,6 @@ const post = async <R>(
 }
 
 export const fetcher = {
+  get,
   post,
 }

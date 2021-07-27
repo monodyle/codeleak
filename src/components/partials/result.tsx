@@ -1,3 +1,4 @@
+import { Button } from 'components/button'
 import { CopyIcon } from 'components/icons'
 import { patterns } from 'constants/pattern.const'
 import copy from 'copy-to-clipboard'
@@ -19,25 +20,17 @@ const Result = ({ children }: Props) => {
 
   return (
     <div className="relative p-4 border-2 border-purple-200 rounded-md bg-purple-50 bg-opacity-20 pt-7">
-      <button
-        className={[
-          'flex items-center text-xs text-purple-700 font-medium',
-          'absolute px-2 py-1 bg-purple-100 rounded top-2 right-2',
-          // hover
-          'hover:bg-purple-200',
-          // focus
-          'focus:bg-purple-200 focus:ring focus:ring-purple-400 focus:ring-offset-2 focus:outline-none',
-          //
-          'target:bg-purple-300',
-        ].join(' ')}
+      <Button
+        variant="small"
         title="Copy"
+        className="absolute top-2 right-2"
         onClick={() => {
           setCopied(true)
           copy(children)
         }}
       >
         <CopyIcon className="w-4 h-4 mr-1" /> {copied ? 'Copied' : 'Copy'}
-      </button>
+      </Button>
       <h3 className="absolute top-0 left-0 px-2 pb-1 text-sm font-semibold text-purple-700 bg-purple-200 rounded-tl rounded-br">
         Here you are
       </h3>

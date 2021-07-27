@@ -2,19 +2,8 @@ import { patterns } from 'constants/pattern.const'
 import Cors from 'cors'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { randomIdGenerator } from 'utils/generate'
+import { initMiddleware } from 'utils/middleware'
 import { supabase } from 'utils/supabase'
-
-const initMiddleware = (middleware: Function) => {
-  return (req: NextApiRequest, res: NextApiResponse) =>
-    new Promise((resolve, reject) => {
-      middleware(req, res, (result: unknown) => {
-        if (result instanceof Error) {
-          return reject(result)
-        }
-        return resolve(result)
-      })
-    })
-}
 
 const cors = initMiddleware(Cors({ methods: ['POST', 'OPTIONS'] }))
 

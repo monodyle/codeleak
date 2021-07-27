@@ -1,13 +1,13 @@
 import { Button, Input, Layout } from 'components'
 import { CONFIG } from 'constants/config.const'
 import { patterns } from 'constants/pattern.const'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-import { Fragment, useEffect, useState } from 'react'
-import { supabase } from 'utils/supabase'
-import { useAtom } from 'jotai'
-import { loadingAtom } from 'stores/loading.store'
 import { pages } from 'constants/url.const'
+import { useAtom } from 'jotai'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { Fragment, useEffect, useState } from 'react'
+import { loadingAtom } from 'stores/loading.store'
+import { supabase } from 'utils/supabase'
 
 const LoginPage = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
@@ -35,7 +35,7 @@ const LoginPage = () => {
   }
 
   return (
-    <Layout title="Login" flex>
+    <Layout title={pages.login.title} flex>
       <div className="flex flex-col items-center flex-auto">
         <div className="h-24" />
         <Image
