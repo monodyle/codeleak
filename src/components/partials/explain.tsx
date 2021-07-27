@@ -19,7 +19,7 @@ export const Explain = () => {
         </code>
       </Paragraph>
       <Paragraph>
-        Feel free to use. If you enojoy, you can{' '}
+        Feel free to use. If you enjoy, you can{' '}
         <a href={LINKS.donate} className="font-medium">
           buy me a coffee
         </a>
