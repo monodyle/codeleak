@@ -1,4 +1,4 @@
-import { LINKS } from 'constants/config.const'
+import { EXAMPLE_CODE, LINKS } from 'constants/config.const'
 
 const Paragraph: React.FC<{}> = ({ children }) => (
   <p className="my-3 text-gray-500">{children}</p>
@@ -15,7 +15,7 @@ export const Explain = () => {
       <Paragraph>
         Let&apos;s take an example, decode this code:{' '}
         <code className="inline-block px-1 font-mono text-gray-700 bg-gray-100 border border-gray-200 rounded">
-          XXXXXXXX
+          {EXAMPLE_CODE}
         </code>
       </Paragraph>
       <Paragraph>

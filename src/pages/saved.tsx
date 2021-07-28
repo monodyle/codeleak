@@ -4,6 +4,7 @@ import { ArrowDownIcon, ArrowUpIcon } from 'components/icons'
 import { DataResult } from 'constants/interface.const'
 import { api, pages } from 'constants/url.const'
 import { useAtom } from 'jotai'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Fragment, useEffect, useMemo, useState } from 'react'
 import { userAtom } from 'stores/auth.store'
@@ -54,7 +55,7 @@ const SavedPage = () => {
   return session ? (
     <Layout title={pages.saved.title} flex>
       <div className="h-12" />
-      <div className="flex items-end justify-between">
+      <div className="flex items-center justify-between">
         <h4 className="text-lg font-semibold text-gray-700">
           {pages.saved.title}
         </h4>
@@ -73,7 +74,7 @@ const SavedPage = () => {
         </Button>
       </div>
       <div className="h-2" />
-      {items &&
+      {items && items.length ? (
         items.map((item, key) => (
           <Fragment key={item.code || key}>
             <SavedItem
@@ -83,7 +84,18 @@ const SavedPage = () => {
             />
             <div className="h-3" />
           </Fragment>
-        ))}
+        ))
+      ) : (
+        <div className="px-4 py-2 text-sm text-center text-gray-500 border border-gray-100 rounded-lg">
+          Nothing here,
+          <br />
+          Start your{' '}
+          <Link href={pages.home.path}>
+            <a>sharing now</a>
+          </Link>
+          !
+        </div>
+      )}
     </Layout>
   ) : null
 }

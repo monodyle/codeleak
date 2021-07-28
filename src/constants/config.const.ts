@@ -6,7 +6,7 @@ export const CONFIG = {
   image: '/images/og-image.png',
   colors: {
     theme: '#FFFFFF',
-    title: '#1366E9',
+    title: '#8b5cf6',
   },
 } as const
 
@@ -14,4 +14,6 @@ export const LINKS = {
   donate: 'https://ko-fi.com/monodyle',
   github: 'https://github.com/monodyle',
   report: 'https://github.com/monodyle/share-code/issues/new',
-}
+} as const
+
+export const EXAMPLE_CODE = 'XXXXXXXX'
