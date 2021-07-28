@@ -1,9 +1,9 @@
-import { patterns } from 'constants/pattern.const'
 import Cors from 'cors'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { randomIdGenerator } from 'utils/generate'
+import { randomIdGenerator } from 'utils/generator'
 import { initMiddleware } from 'utils/middleware'
 import { supabase } from 'utils/supabase'
+import { isURL } from 'utils/validator'
 
 const cors = initMiddleware(Cors({ methods: ['POST', 'OPTIONS'] }))
 
@@ -26,7 +26,7 @@ const ShhhAPI = async (req: NextApiRequest, res: NextApiResponse) => {
   if (type === 'code' && input.length !== 8)
     return res.status(400).json({ error: 'Invalid input length' })
 
-  if (type === 'url' && patterns.url.test(input) === false)
+  if (type === 'url' && isURL(input) === false)
     return res.status(400).json({ error: 'Invalid url input' })
 
   if (type === 'code') {

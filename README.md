@@ -25,9 +25,11 @@ You can try it [here](https://codeleak.me).
 
 ## Bug reports or Feature request
 
-If you encounter a bug or have a feature request, you can [create an issue].
+If you encounter a bug or have a feature request, you can [create an issue], or
+[create a discussion].
 
 [create an issue]: https://github.com/monodyle/share-code/issues/new
+[create a discussion]: https://github.com/monodyle/codeleak/discussions/new
 
 ## Support
 

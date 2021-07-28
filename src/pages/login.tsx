@@ -1,6 +1,5 @@
 import { Button, Input, Layout } from 'components'
 import { CONFIG } from 'constants/config.const'
-import { patterns } from 'constants/pattern.const'
 import { pages } from 'constants/url.const'
 import { useAtom } from 'jotai'
 import Image from 'next/image'
@@ -8,6 +7,7 @@ import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { loadingAtom } from 'stores/loading.store'
 import { supabase } from 'utils/supabase'
+import { isEmail } from 'utils/validator'
 
 const LoginPage = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
@@ -71,9 +71,7 @@ const LoginPage = () => {
               <div className="h-3" />
               <Button
                 type="button"
-                disabled={
-                  email.trim() === '' || loading || !patterns.email.test(email)
-                }
+                disabled={email.trim() === '' || loading || !isEmail(email)}
                 onClick={() => sendLogin()}
               >
                 Send me magic link!

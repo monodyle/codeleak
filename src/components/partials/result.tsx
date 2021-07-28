@@ -1,8 +1,8 @@
 import { Button } from 'components/button'
 import { CopyIcon } from 'components/icons'
-import { patterns } from 'constants/pattern.const'
 import copy from 'copy-to-clipboard'
 import { useEffect, useState } from 'react'
+import { isURL } from 'utils/validator'
 
 interface Props {
   children: string
@@ -35,7 +35,7 @@ const Result = ({ children }: Props) => {
         Here you are
       </h3>
       <p className="text-xl text-center text-gray-700 break-words">
-        {patterns.url.test(children) ? (
+        {isURL(children) ? (
           <a href={children} target="_blank" rel="noreferrer">
             {children}
           </a>
