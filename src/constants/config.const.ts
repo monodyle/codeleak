@@ -1,8 +1,8 @@
 export const CONFIG = {
   url: 'https://codeleak.me',
-  title: 'ShareCode',
+  title: 'CodeLeak',
   author: 'Monody Le',
-  description: 'Share link with a code.',
+  description: 'Share link like an anon!',
   image: '/images/og-image.png',
   colors: {
     theme: '#FFFFFF',

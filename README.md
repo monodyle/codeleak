@@ -2,7 +2,7 @@
 
 <img src="/public/images/logo-128.png" width="128" align="right" />
 
-Share link, with a code!
+Share link like an anon!
 
 ## What is this?
 

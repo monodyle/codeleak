@@ -1,6 +1,6 @@
 {
   "name": "codeleak",
-  "description": "Share link with a code.",
+  "description": "Share link like an anon!",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
