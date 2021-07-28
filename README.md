@@ -1,4 +1,4 @@
-# Link Code 🔗
+# CodeLeak 🔗
 
 <img src="/public/images/logo-128.png" width="128" align="right" />
 
@@ -15,7 +15,7 @@ string like `W4G890Q2`. If someone using `W4G890Q2` to reveal, they will get
 
 ## Try it now
 
-You can try it [here](http://share-code-orcin.vercel.app/).
+You can try it [here](https://codeleak.me).
 
 ## Features
 

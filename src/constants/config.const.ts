@@ -1,5 +1,5 @@
 export const CONFIG = {
-  url: 'https://minhle.space',
+  url: 'https://codeleak.me',
   title: 'ShareCode',
   author: 'Monody Le',
   description: 'Share link with a code.',
