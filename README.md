@@ -13,6 +13,10 @@ Example: I can encode `http://github.com/monodyle/share-code` to a random
 string like `W4G890Q2`. If someone using `W4G890Q2` to reveal, they will get
 `http://github.com/monodyle/share-code`.
 
+## Try it now
+
+You can try it [here](http://share-code-orcin.vercel.app/).
+
 ## Features
 
 - Encode a link as code
