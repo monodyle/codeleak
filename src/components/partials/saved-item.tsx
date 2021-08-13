@@ -21,7 +21,7 @@ export const SavedItem = (props: Props) => {
   }, [copied])
 
   return (
-    <div className="flex justify-between px-4 py-2 border border-gray-100 rounded-lg flex-wrap">
+    <div className="flex flex-wrap justify-between px-4 py-2 border border-gray-100 rounded-lg">
       <div className="w-1/4">
         <div className="text-xs font-medium text-gray-400 uppercase">Code</div>
         <div className="flex items-center text-gray-700">
@@ -48,7 +48,7 @@ export const SavedItem = (props: Props) => {
         <div className="font-medium">
           <a
             href={url}
-            className="inline-flex items-center"
+            className="flex items-center"
             target="_blank"
             rel="noreferrer"
           >
@@ -57,7 +57,7 @@ export const SavedItem = (props: Props) => {
           </a>
         </div>
       </div>
-      <p className="w-full pt-2 text-gray-500 text-sm">
+      <p className="w-full pt-2 text-sm text-gray-500">
         Created at {dateFormat(created_at)}
       </p>
     </div>

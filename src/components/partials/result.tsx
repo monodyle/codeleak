@@ -19,7 +19,7 @@ const Result = ({ children }: Props) => {
   }, [copied])
 
   return (
-    <div className="relative p-4 border-2 border-purple-200 rounded-md bg-purple-50 bg-opacity-20 pt-7">
+    <div className="relative p-4 pt-8 border-2 border-purple-200 rounded-md bg-purple-50 bg-opacity-20">
       <Button
         variant="small"
         title="Copy"
@@ -36,7 +36,12 @@ const Result = ({ children }: Props) => {
       </h3>
       <p className="text-xl text-center text-gray-700 break-words">
         {isURL(children) ? (
-          <a href={children} target="_blank" rel="noreferrer">
+          <a
+            href={children}
+            target="_blank"
+            rel="noreferrer"
+            className="block truncate"
+          >
             {children}
           </a>
         ) : (
