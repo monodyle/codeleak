@@ -1,3 +1,5 @@
+@import url('fonts.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,5 +20,5 @@ a {
 }
 
 a:hover {
-  color: theme("colors.purple.500");
+  color: theme('colors.purple.500');
 }
